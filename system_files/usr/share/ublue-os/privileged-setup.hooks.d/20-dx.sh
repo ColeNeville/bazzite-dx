@@ -14,7 +14,6 @@ append_group() {
 }
 
 # Setup Groups
-append_group docker
 
 # We dont have incus on the image yet
 # append_group incus-admin
@@ -22,5 +21,4 @@ append_group docker
 
 mapfile -t wheelarray < <(getent group wheel | cut -d ":" -f 4 | tr ',' '\n')
 for user in "${wheelarray[@]}"; do
-	usermod -aG docker "$user"
 done
