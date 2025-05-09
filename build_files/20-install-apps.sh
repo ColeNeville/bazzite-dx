@@ -17,6 +17,7 @@ dnf5 install -y \
     nicstat \
     numactl \
     podman-machine \
+    podman-docker \
     podman-tui \
     python3-ramalama \
     qemu-kvm \
