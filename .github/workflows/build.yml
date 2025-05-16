@@ -217,24 +217,24 @@ jobs:
       # your project for others to consume. You will need to create a public and private key
       # using Cosign and save the private key as a repository secret in Github for this workflow
       # to consume. For more details, review the image signing section of the README.
-      - name: Install Cosign
-        uses: sigstore/cosign-installer@3454372f43399081ed03b604cb2d021dabca52bb # v3.8.2
-        if: github.event_name != 'pull_request'
+      # - name: Install Cosign
+      #   uses: sigstore/cosign-installer@3454372f43399081ed03b604cb2d021dabca52bb # v3.8.2
+      #   if: github.event_name != 'pull_request'
 
-      - name: Sign container image
-        if: github.event_name != 'pull_request'
-        env:
-          LOWERCASE_REGISTRY: ${{ steps.lowercase.outputs.registry }}
-          LOWERCASE_IMAGE: ${{ steps.lowercase.outputs.image }}
-          TAGS_TO_SIGN: ${{ steps.metadata.outputs.tags }}
-          TAGS: ${{ steps.push.outputs.digest }}
-          COSIGN_EXPERIMENTAL: false
-          COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }}
-        run: |
-          IMAGE_FULL="${LOWERCASE_REGISTRY}/${LOWERCASE_IMAGE}"
-          for tag in ${TAGS_TO_SIGN}; do
-            cosign sign -y --key env://COSIGN_PRIVATE_KEY $IMAGE_FULL:$tag
-          done
+      # - name: Sign container image
+      #   if: github.event_name != 'pull_request'
+      #   env:
+      #     LOWERCASE_REGISTRY: ${{ steps.lowercase.outputs.registry }}
+      #     LOWERCASE_IMAGE: ${{ steps.lowercase.outputs.image }}
+      #     TAGS_TO_SIGN: ${{ steps.metadata.outputs.tags }}
+      #     TAGS: ${{ steps.push.outputs.digest }}
+      #     COSIGN_EXPERIMENTAL: false
+      #     COSIGN_PRIVATE_KEY: ${{ secrets.SIGNING_SECRET }}
+      #   run: |
+      #     IMAGE_FULL="${LOWERCASE_REGISTRY}/${LOWERCASE_IMAGE}"
+      #     for tag in ${TAGS_TO_SIGN}; do
+      #       cosign sign -y --key env://COSIGN_PRIVATE_KEY $IMAGE_FULL:$tag
+      #     done
 
   check:
     name: Check all builds successful
