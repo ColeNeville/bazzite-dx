@@ -19,13 +19,11 @@ dnf5 install -y \
     podman-machine \
     podman-docker \
     podman-tui \
-    python3-ramalama \
     qemu-kvm \
     restic \
     rclone \
     sysprof \
-    tiptop \
-    zsh
+    tiptop
 
 dnf5 install --enable-repo="copr:copr.fedorainfracloud.org:ublue-os:packages" -y \
     ublue-setup-services
